@@ -14,7 +14,7 @@ export const Post = styled.article`
 
     img.postImg {
         max-height: 580px;
-        max-width: 100%;
+        width: 100%;
     }
 
     header {
