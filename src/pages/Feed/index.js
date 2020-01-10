@@ -43,7 +43,7 @@ export default function Feed() {
             setPosts(response.data);
         }
         loadPosts();
-    }, [posts]);
+    }, []);
 
     async function handleLike(id) {
         await api.post(`posts/${id}/like`);
