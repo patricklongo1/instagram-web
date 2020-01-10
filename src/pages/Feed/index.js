@@ -46,7 +46,7 @@ export default function Feed() {
             setPosts(response.data);
         }
         loadPosts();
-    }, []);
+    }, [postsChanged]);
 
     async function handleLike(id) {
         await api.post(`posts/${id}/like`);
