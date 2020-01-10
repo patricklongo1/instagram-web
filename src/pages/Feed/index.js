@@ -15,12 +15,14 @@ import { Container, Post } from './styles';
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
+    const [postsChanged, setPostsChanged] = useState([]);
 
     function registerToSocket() {
         const socket = io('http://localhost:3333');
 
         socket.on('post', newPost => {
             setPosts([newPost, ...posts]);
+            setPostsChanged([...postsChanged, '+1']);
         });
 
         socket.on('like', likedPost => {
@@ -29,6 +31,7 @@ export default function Feed() {
                     post.id === likedPost.id ? likedPost : post;
                 })
             );
+            setPostsChanged([...postsChanged, '+1']);
         });
     }
 
