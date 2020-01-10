@@ -15,23 +15,24 @@ import { Container, Post } from './styles';
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
-    const [postsChanged, setPostsChanged] = useState([]);
+    const [addedPost, setAddedPost] = useState({});
+    const [likedPostState, setLikedPostState] = useState({});
 
     function registerToSocket() {
         const socket = io('http://localhost:3333');
 
         socket.on('post', newPost => {
+            setAddedPost(newPost);
             setPosts([newPost, ...posts]);
-            setPostsChanged([...postsChanged, '+1']);
         });
 
         socket.on('like', likedPost => {
+            setLikedPostState(likedPost);
             setPosts(
                 posts.map(post => {
                     post.id === likedPost.id ? likedPost : post;
                 })
             );
-            setPostsChanged([...postsChanged, '+1']);
         });
     }
 
@@ -42,11 +43,10 @@ export default function Feed() {
     useEffect(() => {
         async function loadPosts() {
             const response = await api.get('posts');
-
             setPosts(response.data);
         }
         loadPosts();
-    }, [postsChanged]);
+    }, [addedPost, likedPostState]);
 
     async function handleLike(id) {
         await api.post(`posts/${id}/like`);
