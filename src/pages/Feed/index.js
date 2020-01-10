@@ -60,11 +60,13 @@ export default function Feed() {
                         </div>
                         <img src={more} alt="Mais" />
                     </header>
-                    <img
-                        className="postImg"
-                        src={`http://localhost:3333/files/${post.image}`}
-                        alt="imagem"
-                    />
+                    <div className="image">
+                        <img
+                            className="postImg"
+                            src={`http://localhost:3333/files/${post.image}`}
+                            alt="imagem"
+                        />
+                    </div>
 
                     <footer>
                         <div className="actions">

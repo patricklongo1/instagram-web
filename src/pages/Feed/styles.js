@@ -12,8 +12,12 @@ export const Post = styled.article`
     border: 1px solid #ddd;
     margin-top: 30px;
 
+    div.image {
+        max-height: 580px !important;
+    }
+
     img.postImg {
-        max-height: 580px;
+        max-height: 580px !important;
         width: 100%;
     }
 
